@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=4 uid="uid://dnj27c7y5bfha"]
+
+[ext_resource type="Script" uid="uid://cc1hths8p8kj7" path="res://scenes/world/Board.cs" id="1_7wl2k"]
+[ext_resource type="Texture2D" uid="uid://br6s52ogtl05d" path="res://scenes/world/Pong.png" id="1_vq680"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7wl2k"]
+texture = ExtResource("1_vq680")
+1:0/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+3:0/0 = 0
+1:1/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_rxcpc"]
+sources/2 = SubResource("TileSetAtlasSource_7wl2k")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7wl2k"]
+size = Vector2(4, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxcpc"]
+size = Vector2(4, 48)
+
+[node name="Board" type="Node2D"]
+script = ExtResource("1_7wl2k")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAAAAgADAAEAADAAAAEAAgADAAAAAGABAAAAAgADAAAAAAACAAAAAgADAAAAAAADAAAAAgADAAAAAAAEAAAAAgACAAAAAAAAAAUAAgADAAAAAGAAAAYAAgADAAEAAFABAAYAAgADAAAAADACAAYAAgADAAAAADADAAYAAgADAAAAADAEAAYAAgACAAAAADAEAAEAAgACAAEAAAAEAAIAAgACAAEAAAAEAAMAAgACAAEAAAAEAAQAAgACAAEAAAAEAAUAAgACAAEAAAAGAAAAAgADAAAAAAAGAAYAAgADAAAAADAHAAAAAgADAAAAAAAHAAYAAgADAAAAADAFAAAAAgACAAAAAAAFAAYAAgACAAAAADAHAAUAAgABAAEAAAAGAAUAAgABAAEAAAAFAAUAAgACAAEAAAAFAAQAAgACAAEAAAAGAAQAAgABAAEAAAAHAAQAAgABAAEAAAAHAAMAAgABAAEAAAAHAAIAAgABAAEAAAAHAAEAAgABAAEAAAAGAAEAAgABAAEAAAAFAAEAAgACAAEAAAAFAAIAAgACAAEAAAAFAAMAAgACAAEAAAAGAAMAAgABAAEAAAAGAAIAAgABAAEAAAABAAEAAgABAAEAAAACAAEAAgABAAEAAAADAAEAAgABAAEAAAADAAIAAgABAAEAAAADAAMAAgABAAEAAAADAAQAAgABAAEAAAADAAUAAgABAAEAAAACAAUAAgABAAEAAAABAAUAAgABAAEAAAABAAQAAgABAAEAAAACAAQAAgABAAEAAAACAAMAAgABAAEAAAACAAIAAgABAAEAAAABAAIAAgABAAEAAAABAAMAAgABAAEAAAAAAAQAAgABAAEAAAAAAAMAAgABAAEAAAAAAAIAAgABAAEAAAAJAAAAAgADAAEAAGAJAAEAAgADAAAAAFAJAAIAAgABAAEAAAAJAAMAAgABAAEAAAAJAAQAAgABAAEAAAAJAAUAAgADAAAAAFAJAAYAAgADAAEAAAAIAAAAAgADAAAAAAAIAAYAAgADAAAAADAIAAEAAgABAAEAAAAIAAIAAgABAAEAAAAIAAMAAgABAAEAAAAIAAQAAgABAAEAAAAIAAUAAgABAAEAAAA=")
+tile_set = SubResource("TileSet_rxcpc")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="WallTop" type="CollisionPolygon2D" parent="Walls"]
+polygon = PackedVector2Array(0, 32, 4, 32, 4, 4, 156, 4, 156, 32, 160, 32, 160, 0, 0, 0)
+
+[node name="WallBottom" type="CollisionPolygon2D" parent="Walls"]
+polygon = PackedVector2Array(0, 80, 4, 80, 4, 108, 156, 108, 156, 80, 160, 80, 160, 112, 0, 112)
+
+[node name="GoalLeft" type="Area2D" parent="."]
+position = Vector2(2, 56)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalLeft"]
+shape = SubResource("RectangleShape2D_7wl2k")
+
+[node name="GoalRight" type="Area2D" parent="."]
+position = Vector2(158, 56)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalRight"]
+shape = SubResource("RectangleShape2D_rxcpc")
