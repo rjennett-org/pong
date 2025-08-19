@@ -17,5 +17,9 @@ public partial class Ball : RigidBody2D
         // Apply bounce based on collision normal
     }
 
+    public void Launch()
+    {
+        ApplyCentralImpulse(newForce);
+    }
 
 }

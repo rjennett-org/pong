@@ -3,16 +3,17 @@ using System;
 
 public partial class Paddle : CharacterBody2D
 {
-    PackedScene ball;
+    static PackedScene ball = ResourceLoader.Load<PackedScene>("res://scenes/ball/ball.tscn");
+    // Instantiate ball scene
+    Ball ballInstance = ball.Instantiate<Ball>();
+
+    Node2D board;
 
     private int _speed = 300;
 
     public override void _Ready()
     {
-        ball = ResourceLoader.Load<PackedScene>("res://scenes/ball/ball.tscn");
-
-        // Instantiate ball scene
-        Node2D ballInstance = ball.Instantiate<Node2D>();
+        board = GetNode<Node2D>("../Board");
 
         // Add new ball scene instance to node tree
         AddChild(ballInstance);
@@ -38,5 +39,11 @@ public partial class Paddle : CharacterBody2D
     }
 
     // Launch ball on input
+    public void LaunchBall()
+    {
+        ballInstance.Launch();
+        ballInstance.Reparent(board);
+    }
+    
     // Ball direction based on paddle collision position
 }
