@@ -30,6 +30,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAgADAAEAADAAAAEAAgADAAAAAGABAAAAAgADAAA
 tile_set = SubResource("TileSet_rxcpc")
 
 [node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 2
 
 [node name="WallTop" type="CollisionPolygon2D" parent="Walls"]
 polygon = PackedVector2Array(0, 32, 4, 32, 4, 4, 156, 4, 156, 32, 160, 32, 160, 0, 0, 0)
