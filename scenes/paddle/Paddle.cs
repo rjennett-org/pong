@@ -9,7 +9,7 @@ public partial class Paddle : CharacterBody2D
 
     Node2D board;
 
-    private int _speed = 300;
+    private int _speed = 150;
 
     public override void _Ready()
     {
