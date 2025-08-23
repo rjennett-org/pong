@@ -1,15 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://1habkhaooxio"]
+[gd_scene load_steps=5 format=3 uid="uid://1habkhaooxio"]
 
 [ext_resource type="Texture2D" uid="uid://br6s52ogtl05d" path="res://scenes/world/Pong.png" id="1_oqv3d"]
 [ext_resource type="Script" uid="uid://bl06hkjpfklpo" path="res://scenes/ball/Ball.cs" id="3_stoaj"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nv6q1"]
+friction = 0.0
+bounce = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nv6q1"]
 radius = 3.0
 
 [node name="Ball" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_nv6q1")
 gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 1
+linear_damp_mode = 1
+angular_damp_mode = 1
 script = ExtResource("3_stoaj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
