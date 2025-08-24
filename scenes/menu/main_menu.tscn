@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://226pgvbwdpt1"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ButtonSinglePlayer" type="Button" parent="."]
+layout_mode = 1
+offset_left = 28.0
+offset_top = 8.0
+offset_right = 135.0
+offset_bottom = 39.0
+text = "Single Player"
+
+[node name="Button2Player" type="Button" parent="."]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 41.0
+offset_right = 117.0
+offset_bottom = 72.0
+text = "2 Player"
+
+[node name="ButtonExitGame" type="Button" parent="."]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 74.0
+offset_right = 125.0
+offset_bottom = 105.0
+text = "Exit Game"
