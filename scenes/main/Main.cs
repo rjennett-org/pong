@@ -37,11 +37,13 @@ public partial class Main : Node2D
         AddChild(paddleInstanceP1);
         AddChild(paddleInstanceP2cpu);
 
-        // Set position for paddle left
+        // Set position for paddles
         paddleInstanceP1.Position = goalLeft.Position + new Vector2(10, 0);
-
-        // Set position for paddle right
         paddleInstanceP2cpu.Position = goalRight.Position - new Vector2(10, 0);
+
+        // Set name for paddles
+        paddleInstanceP1.Name = "Paddle1";
+        paddleInstanceP2cpu.Name = "Paddle2";
 
         // Set State to GameStart
         currentState = State.GameStart;
