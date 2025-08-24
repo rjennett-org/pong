@@ -76,10 +76,16 @@ public partial class Main : Node2D
                 // Check for winning score and end game if reached
                 break;
             case State.NewRound:
+                // Spawn new ball on paddle opposite of most recent socring player
+                // Handle ball launch
                 break;
             case State.GameEnd:
+                // Display game end menu
+                // Allow return to main menu
                 break;
             case State.Paused:
+                // Pause the game
+                // Display the pause menu
                 break;
             default:
                 break;
