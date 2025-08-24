@@ -10,13 +10,18 @@ public partial class Main : Node2D
     static PackedScene paddle = ResourceLoader.Load<PackedScene>("res://scenes/paddle/paddle.tscn");
 
     // Instantiate paddle scene
-    Paddle paddleInstance = paddle.Instantiate<Paddle>();
+    Paddle paddleInstanceP1 = paddle.Instantiate<Paddle>();
+    Paddle paddleInstanceP2cpu = paddle.Instantiate<Paddle>();
 
     enum State
     {
+        MainMenu,
+        Paused,
         GameStart,
         InPlay,
-        Scoring
+        Scoring,
+        NewRound,
+        GameEnd
     }
 
     public override void _Ready()
@@ -24,11 +29,19 @@ public partial class Main : Node2D
         goalLeft = GetNode<Area2D>("Board/GoalLeft");
         goalRight = GetNode<Area2D>("Board/GoalRight");
 
-        // Add newly instantiated scene to node tree
-        AddChild(paddleInstance);
+        // Set playerType of paddle
+        paddleInstanceP1.playerType = 0;
+        paddleInstanceP2cpu.playerType = 1;
 
-        // Set position for paddle
-        paddleInstance.Position = goalLeft.Position + new Vector2(10, 0);
+        // Add newly instantiated paddle scenes to node tree
+        AddChild(paddleInstanceP1);
+        AddChild(paddleInstanceP2cpu);
+
+        // Set position for paddle left
+        paddleInstanceP1.Position = goalLeft.Position + new Vector2(10, 0);
+
+        // Set position for paddle right
+        paddleInstanceP2cpu.Position = goalRight.Position - new Vector2(10, 0);
 
         // Set State to GameStart
         currentState = State.GameStart;
@@ -42,7 +55,7 @@ public partial class Main : Node2D
             if (Input.IsActionPressed("launch_ball"))
             {
                 // Launch the ball
-                paddleInstance.LaunchBall();
+                paddleInstanceP1.LaunchBall();
 
                 // Reparent ball to...baord? main?
 
