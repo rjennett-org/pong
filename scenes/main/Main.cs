@@ -49,30 +49,40 @@ public partial class Main : Node2D
 
     public override void _Process(double delta)
     {
-        if (currentState == State.GameStart)
+        switch (currentState)
         {
-            // Handle input to launch ball and start round
-            if (Input.IsActionPressed("launch_ball"))
-            {
-                // Launch the ball
-                paddleInstanceP1.LaunchBall();
+            case State.MainMenu:
+                break;
+            case State.GameStart:
+                // Handle input to launch ball and start round
+                if (Input.IsActionPressed("launch_ball"))
+                {
+                    // Launch the ball
+                    paddleInstanceP1.LaunchBall();
 
-                // Reparent ball to...baord? main?
+                    // Reparent ball to...baord? main?
 
-                // Change state to InPlay
-                currentState = State.InPlay;
-            }
-        }
-        else if (currentState == State.InPlay)
-        {
-            // Ball bounces around
-            // Ball can score
-        }
-        else if (currentState == State.Scoring)
-        {
-            // Handle score increment
-            // Return state to GameStart for next round
-            // Check for winning score and end game if reached
+                    // Change state to InPlay
+                    currentState = State.InPlay;
+                }
+                break;
+            case State.InPlay:
+                // Ball bounces around
+                // Ball can score
+                break;
+            case State.Scoring:
+                // Handle score increment
+                // Return state to GameStart for next round
+                // Check for winning score and end game if reached
+                break;
+            case State.NewRound:
+                break;
+            case State.GameEnd:
+                break;
+            case State.Paused:
+                break;
+            default:
+                break;
         }
     }
 }
