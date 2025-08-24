@@ -4,7 +4,8 @@ using System;
 public partial class Ball : RigidBody2D
 {
 
-    Vector2 newForce = new Vector2(40, 0);
+    float initVelocity = 40;
+    float maxVelocity = 60;
 
     public override void _Ready()
     {
@@ -32,21 +33,28 @@ public partial class Ball : RigidBody2D
                 // Negative = bottom of paddle
                 var distanceFromPaddleCenter = colliderPosition.Y - collisionPosition.Y;
 
-                // Override outgoing vector after collision
-                // Get collision vector
-                Vector2 velocityIncoming = state.GetContactLocalVelocityAtPosition(0);
-
                 // Calculate adjusted outgoing vector
-                Vector2 velocityOutgoing = new Vector2(velocityIncoming.X * -1, velocityIncoming.Y + distanceFromPaddleCenter);
+                float outgoingAdjustment = distanceFromPaddleCenter * 6 * -1;
+
+                // Apply only the adjustments to be made to the physics-based resultant vector
+                Vector2 velocityOutgoing = new Vector2(0, outgoingAdjustment);
 
                 // Apply impulse
                 state.ApplyCentralImpulse(velocityOutgoing);
+
+                // Limit max ball speed
+                if (state.LinearVelocity.Length() > maxVelocity)
+                {
+                    // Calculate normal vector in original direction, multiply by max magnitude
+                    state.LinearVelocity = state.LinearVelocity.Normalized() * maxVelocity;
+                }
             }
         }
     }
 
     public void Launch()
     {
+        Vector2 newForce = new Vector2(initVelocity, 0);
         ApplyCentralImpulse(newForce);
     }
 
