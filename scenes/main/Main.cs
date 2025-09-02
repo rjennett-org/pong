@@ -26,25 +26,6 @@ public partial class Main : Node2D
 
     public override void _Ready()
     {
-        goalLeft = GetNode<Area2D>("Board/GoalLeft");
-        goalRight = GetNode<Area2D>("Board/GoalRight");
-
-        // Set playerType of paddle
-        paddleInstanceP1.playerType = 0;
-        paddleInstanceP2cpu.playerType = 1;
-
-        // Add newly instantiated paddle scenes to node tree
-        AddChild(paddleInstanceP1);
-        AddChild(paddleInstanceP2cpu);
-
-        // Set position for paddles
-        paddleInstanceP1.Position = goalLeft.Position + new Vector2(10, 0);
-        paddleInstanceP2cpu.Position = goalRight.Position - new Vector2(10, 0);
-
-        // Set name for paddles
-        paddleInstanceP1.Name = "Paddle1";
-        paddleInstanceP2cpu.Name = "Paddle2";
-
         // Set State to GameStart
         currentState = State.GameStart;
     }
@@ -56,6 +37,32 @@ public partial class Main : Node2D
             case State.MainMenu:
                 break;
             case State.GameStart:
+                goalLeft = GetNode<Area2D>("Board/GoalLeft");
+                goalRight = GetNode<Area2D>("Board/GoalRight");
+
+                // Set playerType of paddle
+                paddleInstanceP1.playerType = 0;
+                paddleInstanceP2cpu.playerType = 1;
+
+                // Set name for paddles
+                paddleInstanceP1.Name = "Paddle1";
+                paddleInstanceP2cpu.Name = "Paddle2";
+
+                // Add newly instantiated paddle scenes to node tree if not already present
+                if (!HasNode("Paddle1"))
+                {
+                    AddChild(paddleInstanceP1);
+                }
+                if (!HasNode("Paddle2"))
+                {
+                    AddChild(paddleInstanceP2cpu);
+                }
+
+                // Set position for paddles
+                paddleInstanceP1.Position = goalLeft.Position + new Vector2(10, 0);
+                paddleInstanceP2cpu.Position = goalRight.Position - new Vector2(10, 0);
+
+                
                 // Handle input to launch ball and start round
                 if (Input.IsActionPressed("launch_ball"))
                 {
