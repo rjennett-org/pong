@@ -14,7 +14,8 @@ public partial class Paddle : CharacterBody2D
 
     public override void _Ready()
     {
-        board = GetNode<Node2D>("../Board");
+        // Get parent Board and cast to Node2D
+        board = (Node2D)GetParent();
 
         switch (playerType)
         {
